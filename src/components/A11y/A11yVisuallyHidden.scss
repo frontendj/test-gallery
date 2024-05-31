@@ -1,0 +1,50 @@
+/*
+ * Utility class to hide content visually while keeping it screen reader-accessible.
+ * Source: https://www.scottohara.me/blog/2017/04/14/inclusively-hidden.html
+ */
+
+.a11y-visually-hidden {
+    position: absolute;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    clip: rect(0 0 0 0);
+    clip-path: inset(100%);
+    white-space: nowrap;
+
+    // class .a11y-show-visually-hidden is used for presentational purposes to reveal visually hidden blocks
+    .a11y-show-visually-hidden & {
+        /* stylelint-disable-line a11y/font-size-is-readable */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: inline-block;
+        max-width: max(80px, 100%); // if there is enough space we prefer block stretching
+        width: max-content;
+        height: auto;
+        outline: 1px dotted #fff;
+        background: #ca2020;
+        clip: auto;
+        clip-path: none;
+        color: #fff;
+        opacity: 0.5;
+        white-space: normal;
+        word-wrap: break-word;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 1.2;
+        font-family: sans-serif;
+        transform: translate(-50%, -50%);
+
+        &:hover {
+            /* stylelint-disable-line a11y/selector-pseudo-class-focus */
+            opacity: 1;
+        }
+    }
+
+    // .csms-a11y-show-visually-hidden wrapper doesn't make sense if aria-hidden is used
+    [aria-hidden='true'] & {
+        /* stylelint-disable-line a11y/no-display-none */
+        display: none;
+    }
+}

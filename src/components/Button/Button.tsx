@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { ButtonHTMLAttributes, FunctionComponent } from 'react';
+import { ButtonHTMLAttributes, FunctionComponent, ReactNode } from 'react';
 
 import './Button.scss';
 
@@ -26,7 +26,7 @@ export interface ButtonProps {
     /**
      * Text to show inside the button
      */
-    text: string;
+    text: ReactNode | string;
 }
 
 const Button: FunctionComponent<ButtonProps> = ({ buttonAttrs, onClick, styling = 'default', text }) => {
