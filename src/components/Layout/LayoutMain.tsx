@@ -16,12 +16,7 @@ export interface LayoutMainProps {
     tag?: 'div' | 'main';
 }
 
-const defaultProps = {
-    align: 'top',
-    tag: 'div',
-} as const;
-
-export const LayoutMain: FunctionComponent<LayoutMainProps> = ({ align, children, tag }) => {
+export const LayoutMain: FunctionComponent<LayoutMainProps> = ({ align, children, tag = 'main' }) => {
     const Tag = tag as ElementType;
 
     const className = classnames({
@@ -39,5 +34,3 @@ export const LayoutMain: FunctionComponent<LayoutMainProps> = ({ align, children
         return null;
     }
 };
-
-LayoutMain.defaultProps = defaultProps;

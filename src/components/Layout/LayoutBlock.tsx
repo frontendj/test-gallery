@@ -17,17 +17,11 @@ export interface LayoutBlockProps {
     tag?: 'div' | 'footer' | 'section';
 }
 
-const defaultProps = {
-    align: 'top',
-    tag: 'div',
-} as const;
-
-export const LayoutBlock: FunctionComponent<LayoutBlockProps> = ({ align, children, isLimited, isScrollable, tag }) => {
+export const LayoutBlock: FunctionComponent<LayoutBlockProps> = ({ align, children, isScrollable, tag = 'div' }) => {
     const Tag = tag as ElementType;
 
     const className = classnames({
         [`layout__block--align-${align}`]: align,
-        [`layout__block--limited`]: isLimited,
         [`layout__block--scrollable`]: isScrollable,
         layout__block: true,
     });
@@ -38,5 +32,3 @@ export const LayoutBlock: FunctionComponent<LayoutBlockProps> = ({ align, childr
         return null;
     }
 };
-
-LayoutBlock.defaultProps = defaultProps;

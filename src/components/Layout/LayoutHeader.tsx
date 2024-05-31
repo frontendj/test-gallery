@@ -16,12 +16,7 @@ export interface LayoutHeaderProps {
     tag?: 'div' | 'header';
 }
 
-const defaultProps = {
-    align: 'top',
-    tag: 'div',
-} as const;
-
-export const LayoutHeader: FunctionComponent<LayoutHeaderProps> = ({ children, position, tag }) => {
+export const LayoutHeader: FunctionComponent<LayoutHeaderProps> = ({ children, position, tag = 'div' }) => {
     const Tag = tag as ElementType;
 
     const className = classnames({
@@ -35,5 +30,3 @@ export const LayoutHeader: FunctionComponent<LayoutHeaderProps> = ({ children, p
         return null;
     }
 };
-
-LayoutHeader.defaultProps = defaultProps;
