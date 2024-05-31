@@ -1,5 +1,7 @@
 import { FunctionComponent, ReactNode } from 'react';
 
+import './Layout.scss';
+
 export interface LayoutProps {
     /**
      * An array of <LayoutHeader/Content/Footer> nodes to be rendered.

@@ -1,4 +1,28 @@
+.image-card {
+    position: relative;
+}
+
 .image-card__image {
     width: 100%;
     aspect-ratio: var(--aspect-ratio, 1.5);
+    object-fit: cover;
+}
+
+.image-card__content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: flex-end;
+    padding: 16px;
+    opacity: 0.01;
+    transition: opacity 0.3s;
+
+    .image-card:hover &,
+    &:focus-within {
+        opacity: 1;
+    }
 }
