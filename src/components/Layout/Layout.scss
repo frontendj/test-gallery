@@ -1,0 +1,83 @@
+.layout {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    min-height: 100vh;
+
+    @supports (height: 100vh) {
+        height: 100dvh;
+    }
+}
+
+// generic "block"
+
+.layout__block {
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.layout__block--align-center {
+    margin-top: auto;
+    margin-bottom: auto;
+
+    & + & {
+        margin-top: 0;
+    }
+}
+
+.layout__block--align-bottom {
+    margin-top: auto;
+    margin-bottom: 0;
+
+    & + &,
+    .layout__block--align-center + & {
+        margin-top: 0;
+    }
+}
+
+.layout__block--align-stretch {
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+.layout__block--scrollable {
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+.layout__header {
+    position: relative;
+    flex: 0 0 auto;
+    width: 100%;
+    padding: 20px;
+}
+
+.layout__header--sticky {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.layout__header--fixed {
+    position: fixed;
+    top: 0;
+}
+
+.layout__main {
+    position: relative;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    padding: 20px;
+}

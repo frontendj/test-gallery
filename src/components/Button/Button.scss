@@ -1,0 +1,76 @@
+@import '../__mixins/a11y-button-reset';
+
+:root {
+    --button-background-color: blue;
+    --button-content-color: white;
+    --button-min-height: 40px;
+    --button-padding-vertical: 4px;
+    --button-padding-horizontal: 16px;
+    --button-border-radius: 4px;
+    --button-font-size: 16px;
+}
+
+.button {
+    @include a11y-button-reset();
+
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    min-height: var(--button-min-height);
+    margin: 0;
+    padding: var(--button-padding-vertical) var(--button-padding-horizontal);
+    border: var(--button-border-width, 0) var(--button-border-style, solid) var(--button-border-color, transparent);
+    border-radius: var(--button-border-radius);
+    background-color: var(--button-background-color, transparent);
+    text-align: center;
+    text-decoration: none;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        pointer-events: none;
+    }
+}
+
+// CONTENT
+
+.button__content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.button__text {
+    display: block;
+    color: var(--button-content-color);
+    font-size: var(--button-font-size);
+    line-height: 1.2;
+}
+
+// pressed
+.button {
+    &:hover::before,
+    &:focus-visible::before {
+        content: '';
+        background-color: rgb(0 0 0 / 0.1);
+    }
+
+    &:active::before,
+    &.is-pressed::before {
+        content: '';
+        background-color: rgb(0 0 0 / 0.2);
+    }
+}
+
+.button--destructive {
+    --button-background-color: red;
+}
