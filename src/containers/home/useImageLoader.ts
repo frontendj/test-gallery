@@ -24,7 +24,7 @@ const useImageLoader = (): UseImageLoaderResult => {
         requestedPages.current.add(page);
 
         try {
-            const newImages = await fetchImages(page);
+            const newImages = await fetchImages(page, 30);
             const uniqueImages = newImages.filter((image) => !loadedImageIds.current.has(image.id));
             uniqueImages.forEach((image) => loadedImageIds.current.add(image.id));
             setImages((prevImages) => [...prevImages, ...uniqueImages]);

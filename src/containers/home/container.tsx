@@ -1,4 +1,4 @@
-import { ImageList } from 'components/ImageList/ImageList';
+import { ImageGallery } from 'components/ImageList/ImageList';
 import { LayoutBlock } from 'components/Layout/LayoutBlock';
 import { Loader } from 'components/Loader/Loader';
 import ErrorBoundary from 'src/ErrorBoundary';
@@ -29,7 +29,6 @@ const HomeContainer = () => {
             id: image.id,
             imageAlt: `Image by ${image.author}`,
             imageSrc: `https://picsum.photos/id/${image.id}/${width}/${height}`,
-            //imageSrc: `https://picsum.photos/id/870/200/300?grayscale&blur=2`,
             title: `Image by ${image.author}`,
         };
     };
@@ -38,7 +37,7 @@ const HomeContainer = () => {
 
     return (
         <LayoutBlock align="stretch">
-            <ImageList images={[...new Set(imageCardPropsArray)]} lastImageRef={lastImageRef} />
+            <ImageGallery images={imageCardPropsArray} lastImageRef={lastImageRef} />
             {loading && <Loader />}
         </LayoutBlock>
     );

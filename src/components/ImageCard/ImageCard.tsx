@@ -5,7 +5,7 @@ import { CSSProperties, FunctionComponent } from 'react';
 import './ImageCard.scss';
 
 export interface ImageCardProps {
-    aspectRatio?: number;
+    aspectRatio: number;
     /**
      * Author name
      */
