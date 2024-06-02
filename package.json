@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "homepage": "https://frontendj.github.io/demo-gallery",
   "scripts": {
     "format": "prettier --write \"src/**/*.{js,jsx,tsx,ts}\"",
     "lint": "eslint \"src/**/*.{js,jsx,tsx,ts}\" --quiet",
@@ -11,9 +12,10 @@
     "build": "vite build",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "deploy": "gh-pages -d dist"
   },
-  "author": "",
+  "author": "Mitya Kuznetsov",
   "license": "MIT",
   "devDependencies": {
     "@storybook/addon-a11y": "^8.1.5",
@@ -27,6 +29,7 @@
     "@storybook/react-vite": "^8.1.5",
     "@storybook/test": "^8.1.5",
     "@storybook/testing-library": "^0.2.2",
+    "@types/gh-pages": "^6",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^6.13.1",
     "@typescript-eslint/parser": "^6.13.1",
@@ -41,6 +44,7 @@
     "eslint-plugin-react": "^7.34.2",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-storybook": "^0.8.0",
+    "gh-pages": "^6.1.1",
     "postcss": "^8.4.38",
     "postcss-scss": "^4.0.9",
     "prettier": "^3.2.5",

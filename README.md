@@ -4,6 +4,10 @@
 
 Demo Gallery is a React application that displays a grid of images fetched from the Lorem Pictus API. Users can load more images by scrolling or clicking a "Load More" button. The application supports basic accessibility features including live announcements for screen readers when new images are loaded.
 
+## Preview
+
+Deployed project: https://frontendj.github.io/demo-gallery
+
 ## Features
 
 -   Infinite scrolling to load more images
