@@ -1,9 +1,9 @@
 {
-  "name": "demo-gallery",
+  "name": "test-gallery",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "homepage": "https://frontendj.github.io/demo-gallery",
+  "homepage": "https://frontendj.github.io/test-gallery",
   "scripts": {
     "format": "prettier --write \"src/**/*.{js,jsx,tsx,ts}\"",
     "lint": "eslint \"src/**/*.{js,jsx,tsx,ts}\" --quiet",

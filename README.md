@@ -6,7 +6,7 @@ Demo Gallery is a React application that displays a grid of images fetched from 
 
 ## Preview
 
-Deployed project: https://frontendj.github.io/demo-gallery
+Deployed project: https://frontendj.github.io/test-gallery
 
 ## Features
 
@@ -23,8 +23,8 @@ To set up the project locally, follow these steps:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/frontendj/demo-gallery.git
-cd demo-gallery
+git clone https://github.com/frontendj/test-gallery.git
+cd test-gallery
 ```
 
 2. Install dependencies:
