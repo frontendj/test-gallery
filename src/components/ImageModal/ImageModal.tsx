@@ -1,3 +1,4 @@
+import { A11yVisuallyHidden } from 'components/A11y/A11yVisuallyHidden';
 import { Icon } from 'components/Icon/Icon';
 import { FunctionComponent, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
@@ -77,6 +78,7 @@ const ImageModal: FunctionComponent<ImageModalProps> = ({
                 <p className="image-modal__author">Author: {authorName}</p>
                 <a className="image-modal__action" download href={downloadUrl} rel="noreferrer" target="_blank">
                     Download
+                    <A11yVisuallyHidden>(Opens in new window)</A11yVisuallyHidden>
                 </a>
             </div>
         </dialog>,

@@ -53,8 +53,9 @@ const ImageCard: FunctionComponent<ImageCardProps> = ({
             </button>
             <div className="image-card__content" data-testid="image-card-content">
                 <div className="image-card__author">{authorName}</div>
-                <a className="image-card__action" href={downloadUrl}>
+                <a className="image-card__action" download href={downloadUrl} rel="noreferrer" target="_blank">
                     <Icon a11yLabel={`Download ${a11yLabel}`} name="icon-download" />
+                    <A11yVisuallyHidden>(Opens in new window)</A11yVisuallyHidden>
                 </a>
             </div>
         </div>
