@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { FetchedImage } from 'types/types';
-import { fetchImages } from 'utils/api-service';
+import { fetchImages } from 'utils/fetch-images';
 import { liveAnnouncement } from 'utils/live-announcement';
 
 interface UseImageLoaderResult {

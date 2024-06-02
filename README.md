@@ -55,23 +55,26 @@ yarn build-storybook: Builds the Storybook for deployment.
 **HomeContainer**
 The main container component that handles loading images and managing state for the image grid and modal.
 
+**useImageLoader**
+Custom hook to manage fetching images from the API and handling loading states. Moved to a separate file from HomeContainer to simplify the structure and create space for further extension.
+
 **ImageGrid**
-Displays a grid of images. Supports infinite scrolling and manual loading of more images.
+Displays a grid of images. Supports infinite scrolling and manual loading of more images. Responsive depending on the screen size with reducing to 2 or 1 column on smaller screens.
 
 **ImageCard**
-Represents an individual image in the grid.
+Represents an individual image in the grid. Has a presentation in Storybook that inclused simple previw and storybook test that checks focus-within behaviour
 
 **ImageModal**
 Displays a full-screen preview of the selected image.
 
-**Announcer**
+**A11yVisuallyHidden**
+Handles visually hidden accessible texts
+
+**Button, Icon**
+Simple core components
+
+**liveAnnouncement**
 Handles live announcements for screen readers to improve accessibility.
-
-**useImageLoader**
-Custom hook to manage fetching images from the API and handling loading states.
-
-**useAnnouncer**
-Custom hook to manage live announcements for screen readers.
 
 ## Accessibility
 
@@ -88,3 +91,4 @@ This project includes accessibility features to improve the user experience for 
 -   React
 -   Typescript
 -   Vite
+-   Storybook

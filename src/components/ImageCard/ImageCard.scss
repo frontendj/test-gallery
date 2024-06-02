@@ -11,7 +11,7 @@
     width: 100%;
     aspect-ratio: var(--aspect-ratio, 1.5);
     object-fit: cover;
-    background-color: lightgray;
+    background-color: #706a6a;
 }
 
 .image-card__content {
@@ -25,15 +25,15 @@
     gap: 16px;
     align-items: flex-end;
     padding: 16px;
-    opacity: 0.01;
     transition: opacity 0.3s;
     background-color: rgba(0, 0, 0, 0.4);
     color: #fff;
     pointer-events: none;
+    z-index: -1;
 
     .image-card:hover &,
-    &:focus-within {
-        opacity: 1;
+    .image-card:focus-within & {
+        z-index: 1;
     }
 }
 

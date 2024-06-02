@@ -51,7 +51,7 @@ const ImageCard: FunctionComponent<ImageCardProps> = ({
                 <img alt={a11yLabel} className="image-card__image" loading="lazy" src={imageSrc} />
                 <A11yVisuallyHidden>Open in full screen</A11yVisuallyHidden>
             </button>
-            <div className="image-card__content">
+            <div className="image-card__content" data-testid="image-card-content">
                 <div className="image-card__author">{authorName}</div>
                 <a className="image-card__action" href={downloadUrl}>
                     <Icon a11yLabel={`Download ${a11yLabel}`} name="icon-download" />

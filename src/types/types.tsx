@@ -1,7 +1,3 @@
-export type Global = {
-    isSomethingGoingOn?: boolean;
-};
-
 export type FetchedImage = {
     author: string;
     download_url: string;
