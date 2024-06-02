@@ -7,18 +7,38 @@ import { FunctionComponent, useEffect, useState } from 'react';
 import './ImageGrid.scss';
 
 export interface ImageGridItemProps extends Omit<ImageCardProps, 'onClick'> {
+    /**
+     * The height of the image.
+     */
     height: number;
+    /**
+     * A unique identifier for the image.
+     */
     id: string;
+    /**
+     * The width of the image.
+     */
     width: number;
 }
 
 export interface ImageGridProps {
     /**
-     * A list of items to be rendered.
+     * A list of image items to be rendered in the grid.
      */
     images: ImageGridItemProps[];
+    /**
+     * A boolean indicating whether the grid is currently loading more images.
+     */
     isLoading?: boolean;
+    /**
+     * A reference to the last image in the grid, used for implementing infinite scroll.
+     * This function will be called with the DOM node of the last image.
+     */
     lastImageRef: (node: HTMLDivElement) => void;
+    /**
+     * A callback function that is called when the "Load More" button is clicked.
+     * This function should handle the logic for loading more images.
+     */
     onClickMore: () => void;
 }
 
@@ -88,6 +108,7 @@ const ImageGrid: FunctionComponent<ImageGridProps> = ({ images, isLoading, lastI
                     ))}
                 </div>
             ))}
+
             {selectedImage ? (
                 <ImageModal
                     a11yLabel={selectedImage.a11yLabel}

@@ -2,9 +2,7 @@ import { FunctionComponent } from 'react';
 
 import './Loader.scss';
 
-export interface LoaderProps {}
-
-const Loader: FunctionComponent<LoaderProps> = () => {
+const Loader: FunctionComponent = () => {
     return <div className="loader">Loading...</div>;
 };
 

@@ -6,11 +6,11 @@
 .a11y-visually-hidden {
     position: absolute;
     overflow: hidden;
+    clip: rect(0 0 0 0);
     width: 1px;
     height: 1px;
-    clip: rect(0 0 0 0);
-    clip-path: inset(100%);
     white-space: nowrap;
+    clip-path: inset(100%);
 
     // class .a11y-show-visually-hidden is used for presentational purposes to reveal visually hidden blocks
     .a11y-show-visually-hidden & {
@@ -19,22 +19,22 @@
         top: 50%;
         left: 50%;
         display: inline-block;
-        max-width: max(80px, 100%); // if there is enough space we prefer block stretching
-        width: max-content;
-        height: auto;
-        outline: 1px dotted #fff;
-        background: #ca2020;
         clip: auto;
-        clip-path: none;
+        width: max-content;
+        max-width: max(80px, 100%); // if there is enough space we prefer block stretching
+        height: auto;
+        background: #ca2020;
         color: #fff;
-        opacity: 0.5;
-        white-space: normal;
-        word-wrap: break-word;
+        outline: 1px dotted #fff;
         font-weight: normal;
         font-size: 12px;
-        line-height: 1.2;
         font-family: sans-serif;
+        line-height: 1.2;
+        white-space: normal;
+        word-wrap: break-word;
+        opacity: 0.5;
         transform: translate(-50%, -50%);
+        clip-path: none;
 
         &:hover {
             /* stylelint-disable-line a11y/selector-pseudo-class-focus */

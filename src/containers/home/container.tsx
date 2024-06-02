@@ -5,7 +5,6 @@ import { useScrollbarWidth } from 'utils/use-scrollbar-width';
 
 import { useImageLoader } from './useImageLoader';
 
-// TODO: useQuery
 const HomeContainer = () => {
     const { images, isLoading, lastImageRef, loadMoreImages } = useImageLoader();
 
