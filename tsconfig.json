@@ -22,8 +22,7 @@
             "src/*": ["src/*"],
             "utils/*": ["src/utils/*"],
             "types/*": ["src/types/*"],
-            "styles/*": ["src/styles/*"],
-            "store/*": ["src/store/*"]
+            "styles/*": ["src/styles/*"]
         }
     },
     "include": ["src"]

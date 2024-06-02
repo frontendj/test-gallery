@@ -1,6 +1,7 @@
 import { ImageCard, ImageCardProps } from 'components/ImageCard/ImageCard';
 import { ImageModal } from 'components/ImageModal/ImageModal';
 import { FunctionComponent, useEffect, useState } from 'react';
+import { Loader } from 'components/Loader/Loader';
 
 import './ImageGrid.scss';
 
@@ -16,9 +17,10 @@ export interface ImageGridProps {
      */
     images: ImageGridItemProps[];
     lastImageRef: (node: HTMLDivElement) => void;
+    isLoading?: boolean;
 }
 
-const ImageGrid: FunctionComponent<ImageGridProps> = ({ images, lastImageRef }) => {
+const ImageGrid: FunctionComponent<ImageGridProps> = ({ images, lastImageRef, isLoading }) => {
     const [columns, setColumns] = useState<ImageGridItemProps[][]>([[], [], []]);
     const [, setHeights] = useState<number[]>([0, 0, 0]);
     const [selectedImage, setSelectedImage] = useState<ImageGridItemProps | null>(null);
@@ -77,6 +79,7 @@ const ImageGrid: FunctionComponent<ImageGridProps> = ({ images, lastImageRef }) 
                     onClose={closeModal}
                 />
             ) : null}
+            {isLoading ? (<Loader />) : null}
         </div>
     );
 };

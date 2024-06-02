@@ -48,15 +48,15 @@ const ImageModal: FunctionComponent<ImageModalProps> = ({
         if (dialogNode) {
             if (isOpen) {
                 dialogNode.showModal();
+                document.body.classList.add('modal-open');
             } else {
                 dialogNode.close();
+                document.body.classList.remove('modal-open');
             }
         }
 
         return () => {
-            if (dialogNode) {
-                dialogNode.close();
-            }
+            document.body.classList.remove('modal-open');
         };
     }, [isOpen]);
 
@@ -66,16 +66,19 @@ const ImageModal: FunctionComponent<ImageModalProps> = ({
     }
 
     return ReactDOM.createPortal(
-        <dialog className="modal-dialog" onClose={onClose} ref={dialogRef}>
-            <button className="modal-close" onClick={onClose}>
+        <dialog aria-label={a11yLabel} className="image-modal" onClose={onClose} ref={dialogRef}>
+            <button className="image-modal__close" onClick={onClose}>
                 <Icon a11yLabel="Close" name="icon-close" />
             </button>
-            <div className="modal-image">
-                <img alt={a11yLabel} src={imageSrc} />
-            </div>
 
-            <p className="modal-author">{authorName}</p>
-            <a href={downloadUrl}>Download</a>
+            <img alt={a11yLabel} className="image-modal__media" src={imageSrc} />
+
+            <div className="image-modal__info">
+                <p className="image-modal__author">Author: {authorName}</p>
+                <a className="image-modal__action" download href={downloadUrl} rel="noreferrer" target="_blank">
+                    Download
+                </a>
+            </div>
         </dialog>,
         modalRoot,
     );

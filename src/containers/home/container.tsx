@@ -1,13 +1,15 @@
 import { ImageGrid, ImageGridItemProps } from 'components/ImageGrid/ImageGrid';
-import { Loader } from 'components/Loader/Loader';
 import ErrorBoundary from 'src/ErrorBoundary';
 import { FetchedImage } from 'types/types';
+import { useScrollbarWidth } from 'utils/use-scrollbar-width';
 
 import { useImageLoader } from './useImageLoader';
 
 // TODO: useQuery
 const HomeContainer = () => {
-    const { images, lastImageRef, loading } = useImageLoader();
+    const { images, lastImageRef, isLoading } = useImageLoader();
+
+    useScrollbarWidth();
 
     const mapToImageCardProps = (image: FetchedImage): ImageGridItemProps => {
         const aspectRatio = image.width / image.height;
@@ -28,10 +30,7 @@ const HomeContainer = () => {
     const imageCardPropsArray: ImageGridItemProps[] = images.map(mapToImageCardProps);
 
     return (
-        <>
-            <ImageGrid images={imageCardPropsArray} lastImageRef={lastImageRef} />
-            {loading && <Loader />}
-        </>
+         <ImageGrid images={imageCardPropsArray} lastImageRef={lastImageRef} isLoading={isLoading} />
     );
 };
 

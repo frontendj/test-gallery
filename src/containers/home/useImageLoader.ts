@@ -5,13 +5,13 @@ import { fetchImages } from 'utils/api-service';
 interface UseImageLoaderResult {
     images: FetchedImage[];
     lastImageRef: (node: Element) => void;
-    loading: boolean;
+    isLoading: boolean;
 }
 
 const useImageLoader = (): UseImageLoaderResult => {
     const [images, setImages] = useState<FetchedImage[]>([]);
     const [page, setPage] = useState(1);
-    const [loading, setLoading] = useState(false);
+    const [isLoading, setLoading] = useState(false);
     const observer = useRef<IntersectionObserver | null>(null);
     const requestedPages = useRef<Set<number>>(new Set());
     const loadedImageIds = useRef<Set<string>>(new Set());
@@ -39,7 +39,7 @@ const useImageLoader = (): UseImageLoaderResult => {
 
     const lastImageRef = useCallback(
         (node: Element) => {
-            if (loading) return;
+            if (isLoading) return;
             if (observer.current) observer.current.disconnect();
             observer.current = new IntersectionObserver((entries) => {
                 if (entries[0].isIntersecting) {
@@ -48,10 +48,10 @@ const useImageLoader = (): UseImageLoaderResult => {
             });
             if (node) observer.current.observe(node);
         },
-        [loading],
+        [isLoading],
     );
 
-    return { images, lastImageRef, loading };
+    return { images, lastImageRef, isLoading };
 };
 
 export { useImageLoader };
