@@ -3,6 +3,9 @@ import path from 'path';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+    build: {
+        outDir: '../dist',
+    },
     plugins: [react()],
     resolve: {
         alias: {
