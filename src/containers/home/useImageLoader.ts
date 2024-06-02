@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { FetchedImage } from 'types/types';
 import { fetchImages } from 'utils/api-service';
+import { liveAnnouncement } from 'utils/live-announcement';
 
 interface UseImageLoaderResult {
     images: FetchedImage[];
-    lastImageRef: (node: Element) => void;
     isLoading: boolean;
+    lastImageRef: (node: Element) => void;
+    loadMoreImages: () => void;
 }
 
 const useImageLoader = (): UseImageLoaderResult => {
@@ -22,10 +24,11 @@ const useImageLoader = (): UseImageLoaderResult => {
         requestedPages.current.add(page);
 
         try {
-            const newImages = await fetchImages(page, 30);
+            const newImages = await fetchImages(page, 10);
             const uniqueImages = newImages.filter((image) => !loadedImageIds.current.has(image.id));
             uniqueImages.forEach((image) => loadedImageIds.current.add(image.id));
             setImages((prevImages) => [...prevImages, ...uniqueImages]);
+            liveAnnouncement(`${uniqueImages.length} new images loaded`);
         } catch (error) {
             console.error('Error loading images:', error);
         } finally {
@@ -51,7 +54,11 @@ const useImageLoader = (): UseImageLoaderResult => {
         [isLoading],
     );
 
-    return { images, lastImageRef, isLoading };
+    const loadMoreImages = () => {
+        setPage((prevPage) => prevPage + 1);
+    };
+
+    return { images, isLoading, lastImageRef, loadMoreImages };
 };
 
 export { useImageLoader };

@@ -48,7 +48,7 @@ const ImageCard: FunctionComponent<ImageCardProps> = ({
     return (
         <div className="image-card" ref={elementRef} style={{ '--aspect-ratio': aspectRatio } as CSSProperties}>
             <button className="image-card__media" onClick={onClick}>
-                <img alt={a11yLabel} className="image-card__image" src={imageSrc} loading="lazy" />
+                <img alt={a11yLabel} className="image-card__image" loading="lazy" src={imageSrc} />
                 <A11yVisuallyHidden>Open in full screen</A11yVisuallyHidden>
             </button>
             <div className="image-card__content">

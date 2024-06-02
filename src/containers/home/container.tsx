@@ -7,7 +7,7 @@ import { useImageLoader } from './useImageLoader';
 
 // TODO: useQuery
 const HomeContainer = () => {
-    const { images, lastImageRef, isLoading } = useImageLoader();
+    const { images, isLoading, lastImageRef, loadMoreImages } = useImageLoader();
 
     useScrollbarWidth();
 
@@ -30,7 +30,12 @@ const HomeContainer = () => {
     const imageCardPropsArray: ImageGridItemProps[] = images.map(mapToImageCardProps);
 
     return (
-         <ImageGrid images={imageCardPropsArray} lastImageRef={lastImageRef} isLoading={isLoading} />
+        <ImageGrid
+            images={imageCardPropsArray}
+            isLoading={isLoading}
+            lastImageRef={lastImageRef}
+            onClickMore={loadMoreImages}
+        />
     );
 };
 

@@ -1,7 +1,8 @@
+import { Button } from 'components/Button/Button';
 import { ImageCard, ImageCardProps } from 'components/ImageCard/ImageCard';
 import { ImageModal } from 'components/ImageModal/ImageModal';
-import { FunctionComponent, useEffect, useState } from 'react';
 import { Loader } from 'components/Loader/Loader';
+import { FunctionComponent, useEffect, useState } from 'react';
 
 import './ImageGrid.scss';
 
@@ -16,11 +17,12 @@ export interface ImageGridProps {
      * A list of items to be rendered.
      */
     images: ImageGridItemProps[];
-    lastImageRef: (node: HTMLDivElement) => void;
     isLoading?: boolean;
+    lastImageRef: (node: HTMLDivElement) => void;
+    onClickMore: () => void;
 }
 
-const ImageGrid: FunctionComponent<ImageGridProps> = ({ images, lastImageRef, isLoading }) => {
+const ImageGrid: FunctionComponent<ImageGridProps> = ({ images, isLoading, lastImageRef, onClickMore }) => {
     const [columns, setColumns] = useState<ImageGridItemProps[][]>([[], [], []]);
     const [, setHeights] = useState<number[]>([0, 0, 0]);
     const [selectedImage, setSelectedImage] = useState<ImageGridItemProps | null>(null);
@@ -46,10 +48,6 @@ const ImageGrid: FunctionComponent<ImageGridProps> = ({ images, lastImageRef, is
     const closeModal = () => {
         setSelectedImage(null);
     };
-
-    useEffect(() => {
-        console.log('xxx', selectedImage);
-    }, [selectedImage]);
 
     return (
         <div className="image-grid">
@@ -79,7 +77,16 @@ const ImageGrid: FunctionComponent<ImageGridProps> = ({ images, lastImageRef, is
                     onClose={closeModal}
                 />
             ) : null}
-            {isLoading ? (<Loader />) : null}
+
+            {isLoading ? (
+                <div className="image-grid__loader">
+                    <Loader />
+                </div>
+            ) : (
+                <div className="image-grid__action">
+                    <Button onClick={onClickMore} text="Load more" />
+                </div>
+            )}
         </div>
     );
 };

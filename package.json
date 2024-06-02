@@ -69,7 +69,7 @@
       "^components/(.*)$": "<rootDir>/src/components/$1",
       "^src/(.*)$": "<rootDir>/src/$1",
       "^utils/(.*)$": "<rootDir>/src/utils/$1",
-      "^types/(.*)$": "<rootDir>/src/types/$1",
+      "^types/(.*)$": "<rootDir>/src/types/$1"
     }
   },
   "packageManager": "yarn@4.2.2"
