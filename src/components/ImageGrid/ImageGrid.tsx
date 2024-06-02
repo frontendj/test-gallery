@@ -26,10 +26,31 @@ const ImageGrid: FunctionComponent<ImageGridProps> = ({ images, isLoading, lastI
     const [columns, setColumns] = useState<ImageGridItemProps[][]>([[], [], []]);
     const [, setHeights] = useState<number[]>([0, 0, 0]);
     const [selectedImage, setSelectedImage] = useState<ImageGridItemProps | null>(null);
+    const [columnCount, setColumnCount] = useState(3);
 
     useEffect(() => {
-        const newColumns: ImageGridItemProps[][] = [[], [], []];
-        const newHeights = [0, 0, 0];
+        const handleResize = () => {
+            if (window.innerWidth < 400) {
+                setColumnCount(1);
+            } else if (window.innerWidth < 800) {
+                setColumnCount(2);
+            } else {
+                setColumnCount(3);
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        handleResize();
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    useEffect(() => {
+        const newColumns: ImageGridItemProps[][] = Array.from({ length: columnCount }, () => []);
+        const newHeights = Array.from({ length: columnCount }, () => 0);
 
         images.forEach((image) => {
             const minHeightIndex = newHeights.indexOf(Math.min(...newHeights));
@@ -39,7 +60,7 @@ const ImageGrid: FunctionComponent<ImageGridProps> = ({ images, isLoading, lastI
 
         setColumns(newColumns);
         setHeights(newHeights);
-    }, [images]);
+    }, [images, columnCount]);
 
     const openModal = (image: ImageGridItemProps) => {
         setSelectedImage(image);
