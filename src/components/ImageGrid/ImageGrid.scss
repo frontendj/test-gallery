@@ -1,6 +1,8 @@
 .image-grid {
     display: flex;
     gap: 20px;
+    width: 100%;
+    flex-wrap: wrap;
 
     .modal-open & {
         padding-right: var(--scrollbar-width);
@@ -12,4 +14,6 @@
     flex-direction: column;
     gap: 20px;
     flex: 1 1 auto;
+    width: calc((100% - 2 * 20px) / 3);
+    min-width: 0;
 }
