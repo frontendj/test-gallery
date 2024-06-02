@@ -1,5 +1,3 @@
-@import '../__mixins/a11y-button-reset';
-
 :root {
     --button-background-color: blue;
     --button-content-color: white;
@@ -11,8 +9,6 @@
 }
 
 .button {
-    @include a11y-button-reset();
-
     position: relative;
     display: inline-flex;
     justify-content: center;

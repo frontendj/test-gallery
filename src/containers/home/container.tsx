@@ -1,45 +1,37 @@
-import { ImageGallery } from 'components/ImageList/ImageList';
-import { LayoutBlock } from 'components/Layout/LayoutBlock';
+import { ImageGrid, ImageGridItemProps } from 'components/ImageGrid/ImageGrid';
 import { Loader } from 'components/Loader/Loader';
 import ErrorBoundary from 'src/ErrorBoundary';
 import { FetchedImage } from 'types/types';
 
 import { useImageLoader } from './useImageLoader';
 
-// Technically fetched images have their own aspect ratio, but for illustration of gallery layout
-// we artificially change the aspect ratio of previews
-const ASPECT_RATIOS = [0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2];
-function getRandomValueFromArray() {
-    const randomIndex = Math.floor(Math.random() * ASPECT_RATIOS.length);
-    return ASPECT_RATIOS[randomIndex];
-}
-
 // TODO: useQuery
 const HomeContainer = () => {
-    console.log('HomeContainer');
     const { images, lastImageRef, loading } = useImageLoader();
 
-    const mapToImageCardProps = (image: FetchedImage) => {
-        const randomAspectRatio = getRandomValueFromArray();
-        const width = 100;
-        const height = width / randomAspectRatio;
+    const mapToImageCardProps = (image: FetchedImage): ImageGridItemProps => {
+        const aspectRatio = image.width / image.height;
+        const previewWidth = 100;
+        const previewHeight = Math.round(previewWidth / aspectRatio);
         return {
-            aspectRatio: randomAspectRatio,
-            authorName: `${image.author} - ${image.id}`,
+            a11yLabel: `Image ${image.id} by ${image.author}`, // this label ideally should be more meaningful
+            aspectRatio: aspectRatio,
+            authorName: image.author,
+            downloadUrl: image.download_url,
+            height: image.height,
             id: image.id,
-            imageAlt: `Image by ${image.author}`,
-            imageSrc: `https://picsum.photos/id/${image.id}/${width}/${height}`,
-            title: `Image by ${image.author}`,
+            imageSrc: `https://picsum.photos/id/${image.id}/${previewWidth}/${previewHeight}`,
+            width: image.width,
         };
     };
 
-    const imageCardPropsArray = images.map(mapToImageCardProps);
+    const imageCardPropsArray: ImageGridItemProps[] = images.map(mapToImageCardProps);
 
     return (
-        <LayoutBlock align="stretch">
-            <ImageGallery images={imageCardPropsArray} lastImageRef={lastImageRef} />
+        <>
+            <ImageGrid images={imageCardPropsArray} lastImageRef={lastImageRef} />
             {loading && <Loader />}
-        </LayoutBlock>
+        </>
     );
 };
 

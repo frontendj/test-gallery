@@ -1,7 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Layout } from 'components/Layout/Layout';
-import { LayoutHeader } from 'components/Layout/LayoutHeader';
-import { LayoutMain } from 'components/Layout/LayoutMain';
 import { HomeContainerErrorBoundary } from 'containers/home/container';
 import { StrictMode, createElement } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -17,12 +15,8 @@ const queryClient = new QueryClient({
 const Content = () => {
     return (
         <Layout>
-            <LayoutHeader tag="header">
-                <h1>Demo app</h1>
-            </LayoutHeader>
-            <LayoutMain tag="main">
-                <HomeContainerErrorBoundary />
-            </LayoutMain>
+            <h1>Demo gallery</h1>
+            <HomeContainerErrorBoundary />
         </Layout>
     );
 };

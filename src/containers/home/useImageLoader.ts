@@ -9,7 +9,6 @@ interface UseImageLoaderResult {
 }
 
 const useImageLoader = (): UseImageLoaderResult => {
-    console.log('useImageLoader');
     const [images, setImages] = useState<FetchedImage[]>([]);
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
@@ -18,7 +17,6 @@ const useImageLoader = (): UseImageLoaderResult => {
     const loadedImageIds = useRef<Set<string>>(new Set());
 
     const loadImages = useCallback(async () => {
-        console.log('loadImages');
         if (requestedPages.current.has(page)) return;
         setLoading(true);
         requestedPages.current.add(page);

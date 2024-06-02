@@ -4,7 +4,6 @@ import { FetchedImage } from 'types/types';
 const BASE_URL = 'https://picsum.photos/v2';
 
 export const fetchImages = async (page = 1, limit = 10): Promise<FetchedImage[]> => {
-    console.log('fetchImages');
     try {
         const response = await axios.get<FetchedImage[]>(`${BASE_URL}/list`, {
             params: {
