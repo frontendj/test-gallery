@@ -3,6 +3,7 @@ import { Layout } from 'components/Layout/Layout';
 import { HomeContainerErrorBoundary } from 'containers/home/container';
 import { StrictMode, createElement } from 'react';
 import { createRoot } from 'react-dom/client';
+import { useScrollbarWidth } from 'utils/use-scrollbar-width';
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -21,6 +22,10 @@ const Content = () => {
     );
 };
 const App = () => {
+    // defining scrollbar width in current browser environment
+    // we'll need it for better experience when modal is opened
+    useScrollbarWidth();
+
     return (
         <StrictMode>
             <QueryClientProvider client={queryClient}>

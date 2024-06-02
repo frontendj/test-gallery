@@ -6,3 +6,6 @@ export type FetchedImage = {
     url: string;
     width: number;
 };
+
+export type Page = number;
+export type Limit = number;

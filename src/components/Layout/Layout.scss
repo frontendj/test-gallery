@@ -1,11 +1,11 @@
 .layout {
-    padding: 20px;
+    padding: var(--gap-m);
 
     > h1 {
         position: sticky;
         top: 0;
         z-index: 100;
-        margin-top: -20px;
+        margin-top: calc(-1 * var(--gap-m));
         padding: 10px 0;
         background-color: #fff;
     }

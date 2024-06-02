@@ -48,6 +48,7 @@ const ImageGrid: FunctionComponent<ImageGridProps> = ({ images, isLoading, lastI
     const [selectedImage, setSelectedImage] = useState<ImageGridItemProps | null>(null);
     const [columnCount, setColumnCount] = useState(3);
 
+    // changing number of columns depending on screen width
     useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth < 400) {
@@ -68,6 +69,7 @@ const ImageGrid: FunctionComponent<ImageGridProps> = ({ images, isLoading, lastI
         };
     }, []);
 
+    // filling available columns with images based on which column has the lowest cumulative images height
     useEffect(() => {
         const newColumns: ImageGridItemProps[][] = Array.from({ length: columnCount }, () => []);
         const newHeights = Array.from({ length: columnCount }, () => 0);
@@ -82,6 +84,7 @@ const ImageGrid: FunctionComponent<ImageGridProps> = ({ images, isLoading, lastI
         setHeights(newHeights);
     }, [images, columnCount]);
 
+    // opening modal with specific image
     const openModal = (image: ImageGridItemProps) => {
         setSelectedImage(image);
     };

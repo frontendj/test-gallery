@@ -1,7 +1,7 @@
 .image-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: var(--gap-m);
     width: 100%;
 
     .modal-open & {
@@ -13,8 +13,7 @@
     display: flex;
     flex: 1 1 auto;
     flex-direction: column;
-    gap: 20px;
-    width: calc((100% - 2 * 20px) / 3);
+    gap: var(--gap-m);
     min-width: 0;
 }
 

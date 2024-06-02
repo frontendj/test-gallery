@@ -1,52 +1,39 @@
+import { useQuery } from '@tanstack/react-query';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { FetchedImage } from 'types/types';
 import { fetchImages } from 'utils/fetch-images';
 import { liveAnnouncement } from 'utils/live-announcement';
 
+const LIMIT = 30;
+
 interface UseImageLoaderResult {
     images: FetchedImage[];
     isLoading: boolean;
     lastImageRef: (node: Element) => void;
-    loadMoreImages: () => void;
+    updatePage: () => void;
 }
 
 const useImageLoader = (): UseImageLoaderResult => {
     const [images, setImages] = useState<FetchedImage[]>([]);
     const [page, setPage] = useState(1);
-    const [isLoading, setLoading] = useState(false);
     const observer = useRef<IntersectionObserver | null>(null);
-    const requestedPages = useRef<Set<number>>(new Set());
     const loadedImageIds = useRef<Set<string>>(new Set());
 
-    const loadImages = useCallback(async () => {
-        if (requestedPages.current.has(page)) return;
-        setLoading(true);
-        requestedPages.current.add(page);
+    // cached results of server request
+    const results = useQuery({
+        queryFn: fetchImages,
+        queryKey: ['images', page, LIMIT],
+    });
+    const isLoading = results.isLoading;
 
-        try {
-            const newImages = await fetchImages(page, 10);
-            const uniqueImages = newImages.filter((image) => !loadedImageIds.current.has(image.id));
-            uniqueImages.forEach((image) => loadedImageIds.current.add(image.id));
-            setImages((prevImages) => [...prevImages, ...uniqueImages]);
-            liveAnnouncement(`${uniqueImages.length} new images loaded`);
-        } catch (error) {
-            console.error('Error loading images:', error);
-        } finally {
-            setLoading(false);
-        }
-    }, [page]);
-
-    useEffect(() => {
-        loadImages();
-    }, [page, loadImages]);
-
+    // setting / resetting observer function for the (last) image
     const lastImageRef = useCallback(
         (node: Element) => {
             if (isLoading) return;
             if (observer.current) observer.current.disconnect();
             observer.current = new IntersectionObserver((entries) => {
                 if (entries[0].isIntersecting) {
-                    setPage((prevPage) => prevPage + 1);
+                    updatePage();
                 }
             });
             if (node) observer.current.observe(node);
@@ -54,11 +41,26 @@ const useImageLoader = (): UseImageLoaderResult => {
         [isLoading],
     );
 
-    const loadMoreImages = () => {
+    // loading new images on page / results change
+    useEffect(() => {
+        const newImages = results.data;
+
+        if (newImages) {
+            // we need to check for unique names in case of API response is changed while we are using it
+            const uniqueImages = newImages.filter((image) => !loadedImageIds.current.has(image.id));
+            uniqueImages.forEach((image) => loadedImageIds.current.add(image.id));
+            setImages((prevImages) => [...prevImages, ...uniqueImages]);
+
+            // screen reader experience requires feedback on data load
+            liveAnnouncement(`${uniqueImages.length} new images loaded`);
+        }
+    }, [page, results.data]);
+
+    const updatePage = () => {
         setPage((prevPage) => prevPage + 1);
     };
 
-    return { images, isLoading, lastImageRef, loadMoreImages };
+    return { images, isLoading, lastImageRef, updatePage };
 };
 
 export { useImageLoader };

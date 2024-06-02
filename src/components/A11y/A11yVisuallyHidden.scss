@@ -11,40 +11,4 @@
     height: 1px;
     white-space: nowrap;
     clip-path: inset(100%);
-
-    // class .a11y-show-visually-hidden is used for presentational purposes to reveal visually hidden blocks
-    .a11y-show-visually-hidden & {
-        /* stylelint-disable-line a11y/font-size-is-readable */
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        display: inline-block;
-        clip: auto;
-        width: max-content;
-        max-width: max(80px, 100%); // if there is enough space we prefer block stretching
-        height: auto;
-        background: #ca2020;
-        color: #fff;
-        outline: 1px dotted #fff;
-        font-weight: normal;
-        font-size: 12px;
-        font-family: sans-serif;
-        line-height: 1.2;
-        white-space: normal;
-        word-wrap: break-word;
-        opacity: 0.5;
-        transform: translate(-50%, -50%);
-        clip-path: none;
-
-        &:hover {
-            /* stylelint-disable-line a11y/selector-pseudo-class-focus */
-            opacity: 1;
-        }
-    }
-
-    // .csms-a11y-show-visually-hidden wrapper doesn't make sense if aria-hidden is used
-    [aria-hidden='true'] & {
-        /* stylelint-disable-line a11y/no-display-none */
-        display: none;
-    }
 }

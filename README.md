@@ -92,7 +92,7 @@ This project includes accessibility features to improve the user experience for 
 -   HTML5
 -   CSS3
 -   JS (ES6+)
--   React
+-   React, ReactQuery
 -   Typescript
 -   Vite
 -   Storybook
