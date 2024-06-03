@@ -59,7 +59,7 @@ This will start the application on http://localhost:5173
 The main container component that handles loading images and managing state for the image grid and modal.
 
 **useImageLoader**
-Custom hook to manage fetching images from the API and handling loading states. Moved to a separate file from HomeContainer to simplify the structure and create space for further extension.
+Custom hook to manage fetching images from the API and handling loading states. Moved to a separate file from HomeContainer to simplify the structure and create space for further extension. Uses React Query to cache server requests.
 
 **ImageGrid**
 Displays a grid of images. Supports infinite scrolling and manual loading of more images (keyboard only access). Responsive depending on the screen size with reducing to 2 or 1 column on smaller screens.
@@ -78,6 +78,9 @@ Simple core components
 
 **liveAnnouncement**
 Handles live announcements for screen readers to improve accessibility.
+
+**useScrollbarWidth**
+Calculates scrollbar width for further usage in cases when we need to toggle scrollbar width but avoid layout jumps.
 
 ## Accessibility
 
