@@ -95,33 +95,35 @@ const ImageGrid: FunctionComponent<ImageGridProps> = ({ images, isLoading, lastI
 
     return (
         <div className="image-grid">
-            {columns.map((column, index) => (
-                <div className="image-grid__column" key={index}>
-                    {column.map((image) => (
-                        <ImageCard
-                            a11yLabel={image.a11yLabel}
-                            aspectRatio={image.aspectRatio}
-                            authorName={image.authorName}
-                            downloadUrl={image.downloadUrl}
-                            elementRef={images[images.length - 1].id === image.id ? lastImageRef : undefined}
-                            imageSrc={`https://picsum.photos/id/${image.id}/300/200`}
-                            key={image.id}
-                            onClick={() => openModal(image)}
-                        />
-                    ))}
-                </div>
-            ))}
+            <div className="image-grid__columns">
+                {columns.map((column, index) => (
+                    <div className="image-grid__column" key={index}>
+                        {column.map((image) => (
+                            <ImageCard
+                                a11yLabel={image.a11yLabel}
+                                aspectRatio={image.aspectRatio}
+                                authorName={image.authorName}
+                                downloadUrl={image.downloadUrl}
+                                elementRef={images[images.length - 1].id === image.id ? lastImageRef : undefined}
+                                imageSrc={`https://picsum.photos/id/${image.id}/300/200`}
+                                key={image.id}
+                                onClick={() => openModal(image)}
+                            />
+                        ))}
+                    </div>
+                ))}
 
-            {selectedImage ? (
-                <ImageModal
-                    a11yLabel={selectedImage.a11yLabel}
-                    authorName={selectedImage.authorName}
-                    downloadUrl={selectedImage.downloadUrl}
-                    imageSrc={`https://picsum.photos/id/${selectedImage.id}/${selectedImage.width}/${selectedImage.height}`}
-                    isOpen={Boolean(selectedImage)}
-                    onClose={closeModal}
-                />
-            ) : null}
+                {selectedImage ? (
+                    <ImageModal
+                        a11yLabel={selectedImage.a11yLabel}
+                        authorName={selectedImage.authorName}
+                        downloadUrl={selectedImage.downloadUrl}
+                        imageSrc={`https://picsum.photos/id/${selectedImage.id}/${selectedImage.width}/${selectedImage.height}`}
+                        isOpen={Boolean(selectedImage)}
+                        onClose={closeModal}
+                    />
+                ) : null}
+            </div>
 
             {isLoading ? (
                 <div className="image-grid__loader">

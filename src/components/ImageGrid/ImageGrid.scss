@@ -1,12 +1,12 @@
 .image-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--gap-m);
-    width: 100%;
-
     .modal-open & {
         padding-right: var(--scrollbar-width);
     }
+}
+
+.image-grid__columns {
+    display: flex;
+    gap: var(--gap-m);
 }
 
 .image-grid__column {
@@ -15,10 +15,21 @@
     flex-direction: column;
     gap: var(--gap-m);
     min-width: 0;
+
+    // this width control is not necesary per se, but it gives slightly better experience when we changing
+    // the screen width (i.e. rotating the phone) as the rules help browsers to rebuild the grid instantly
+    @media (min-width: 400px) {
+        width: calc((100% - var(--gap-m)) / 2);
+    }
+
+    @media (min-width: 800px) {
+        width: calc((100% - 2 * var(--gap-m)) / 3);
+    }
 }
 
 .image-grid__loader {
     width: 100%;
+    margin-top: var(--gap-m);
 }
 
 .image-grid__action {
@@ -26,6 +37,7 @@
     width: 100%;
     height: 0;
     opacity: 0.01;
+    margin-top: var(--gap-m);
 
     &:focus-within {
         height: auto;
