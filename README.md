@@ -104,3 +104,5 @@ This project includes accessibility features to improve the user experience for 
 -   better testing coverage
 -   using srcset in images to load less
 -   support pagination for loaded images chunks
+-   add meaningful images descriptions (not possible with current API)
+-   add gradient images placeholders (Blurhash or similar) (not possible with current API)
