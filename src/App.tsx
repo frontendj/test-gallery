@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Layout } from 'components/Layout/Layout';
-import { HomeContainerErrorBoundary } from 'containers/home/container';
+import { HomeContainerErrorBoundary } from 'containers/home/home';
 import { StrictMode, createElement } from 'react';
 import { createRoot } from 'react-dom/client';
 import { useScrollbarWidth } from 'utils/use-scrollbar-width';

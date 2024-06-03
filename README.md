@@ -63,13 +63,13 @@ The main container component that handles loading images and managing state for 
 Custom hook to manage fetching images from the API and handling loading states. Moved to a separate file from HomeContainer to simplify the structure and create space for further extension.
 
 **ImageGrid**
-Displays a grid of images. Supports infinite scrolling and manual loading of more images. Responsive depending on the screen size with reducing to 2 or 1 column on smaller screens.
+Displays a grid of images. Supports infinite scrolling and manual loading of more images (keyboard only access). Responsive depending on the screen size with reducing to 2 or 1 column on smaller screens.
 
 **ImageCard**
 Represents an individual image in the grid. Has a presentation in Storybook that inclused simple previw and storybook test that checks focus-within behaviour
 
 **ImageModal**
-Displays a full-screen preview of the selected image.
+Displays a full-screen preview of the selected image. Uses the most native approach for modals - native HTML component Dialog
 
 **A11yVisuallyHidden**
 Handles visually hidden accessible texts
@@ -96,3 +96,11 @@ This project includes accessibility features to improve the user experience for 
 -   Typescript
 -   Vite
 -   Storybook
+
+## TODO
+
+-   introduce theming via semantic tokens using native CSS variables
+-   cover all components and variants in storybook
+-   better testing coverage
+-   using srcset in images to load less
+-   support pagination for loaded images chunks
