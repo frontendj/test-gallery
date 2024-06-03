@@ -45,14 +45,13 @@ This will start the application on http://localhost:5173
 
 ## Scripts
 
-yarn dev: Starts the development server.
-yarn build: Builds the project for production.
-yarn preview: Previews the production build locally.
-yarn test: Runs the Playwright tests.
-yarn lint: Lints the code using ESLint.
-yarn format: Formats the code using Prettier.
-yarn storybook: Starts Storybook for component development.
-yarn build-storybook: Builds the Storybook for deployment.
+-   yarn dev: Starts the development server.
+-   yarn build: Builds the project for production.
+-   yarn preview: Previews the production build locally.
+-   yarn lint: Lints the code using ESLint.
+-   yarn format: Formats the code using Prettier.
+-   yarn storybook: Starts Storybook for component development.
+-   yarn build-storybook: Builds the Storybook for deployment.
 
 ## Key Components
 
