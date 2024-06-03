@@ -5,7 +5,7 @@ import { FetchedImage } from 'types/types';
 import { useImageLoader } from './useImageLoader';
 
 const HomeContainer = () => {
-    const { images, isLoading, lastImageRef, updatePage } = useImageLoader();
+    const { error, images, isLoading, lastImageRef, updatePage } = useImageLoader();
 
     const mapToImageCardProps = (image: FetchedImage): ImageGridItemProps => {
         const aspectRatio = image.width / image.height;
@@ -26,12 +26,15 @@ const HomeContainer = () => {
     const imageCardPropsArray: ImageGridItemProps[] = images.map(mapToImageCardProps);
 
     return (
-        <ImageGrid
-            images={imageCardPropsArray}
-            isLoading={isLoading}
-            lastImageRef={lastImageRef}
-            onClickMore={updatePage}
-        />
+        <>
+            <ImageGrid
+                images={imageCardPropsArray}
+                isLoading={isLoading}
+                lastImageRef={lastImageRef}
+                onClickMore={updatePage}
+            />
+            {error?.message ? <div>{error?.message}</div> : null}
+        </>
     );
 };
 

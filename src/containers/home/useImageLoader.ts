@@ -7,6 +7,7 @@ import { liveAnnouncement } from 'utils/live-announcement';
 const LIMIT = 30;
 
 interface UseImageLoaderResult {
+    error: Error | null;
     images: FetchedImage[];
     isLoading: boolean;
     lastImageRef: (node: Element) => void;
@@ -25,6 +26,8 @@ const useImageLoader = (): UseImageLoaderResult => {
         queryKey: ['images', page, LIMIT],
     });
     const isLoading = results.isLoading;
+
+    console.log(results);
 
     // setting / resetting observer function for the (last) image
     const lastImageRef = useCallback(
@@ -60,7 +63,7 @@ const useImageLoader = (): UseImageLoaderResult => {
         setPage((prevPage) => prevPage + 1);
     };
 
-    return { images, isLoading, lastImageRef, updatePage };
+    return { error: results.error, images, isLoading, lastImageRef, updatePage };
 };
 
 export { useImageLoader };
