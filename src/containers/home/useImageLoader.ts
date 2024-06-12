@@ -27,8 +27,6 @@ const useImageLoader = (): UseImageLoaderResult => {
     });
     const isLoading = results.isLoading;
 
-    console.log(results);
-
     // setting / resetting observer function for the (last) image
     const lastImageRef = useCallback(
         (node: Element) => {
