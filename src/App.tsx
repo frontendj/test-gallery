@@ -14,6 +14,10 @@ const queryClient = new QueryClient({
 });
 
 const Content = () => {
+    // defining scrollbar width in current browser environment
+    // we'll need it for better experience when modal is opened
+    useScrollbarWidth();
+
     return (
         <Layout>
             <h1>Demo gallery</h1>
@@ -22,10 +26,6 @@ const Content = () => {
     );
 };
 const App = () => {
-    // defining scrollbar width in current browser environment
-    // we'll need it for better experience when modal is opened
-    useScrollbarWidth();
-
     return (
         <StrictMode>
             <QueryClientProvider client={queryClient}>
