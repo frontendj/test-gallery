@@ -6,6 +6,15 @@ import { FunctionComponent, useEffect, useState } from 'react';
 
 import './ImageGrid.scss';
 
+function getPreviewSizes(aspectRatio: number) {
+    const baseWidth = 200;
+
+    return {
+        height: Math.round(baseWidth / aspectRatio),
+        width: baseWidth,
+    };
+}
+
 export interface ImageGridItemProps extends Omit<ImageCardProps, 'onClick'> {
     /**
      * The height of the image.
@@ -93,23 +102,32 @@ const ImageGrid: FunctionComponent<ImageGridProps> = ({ images, isLoading, lastI
         setSelectedImage(null);
     };
 
+    let previewSizes;
+    if (selectedImage) {
+        previewSizes = getPreviewSizes(selectedImage.aspectRatio);
+    }
+
     return (
         <div className="image-grid">
             <div className="image-grid__columns">
                 {columns.map((column, index) => (
                     <div className="image-grid__column" key={index}>
-                        {column.map((image) => (
-                            <ImageCard
-                                a11yLabel={image.a11yLabel}
-                                aspectRatio={image.aspectRatio}
-                                authorName={image.authorName}
-                                downloadUrl={image.downloadUrl}
-                                imageSrc={`https://picsum.photos/id/${image.id}/300/200`}
-                                key={image.id}
-                                onClick={() => openModal(image)}
-                                ref={images[images.length - 1].id === image.id ? lastImageRef : undefined}
-                            />
-                        ))}
+                        {column.map((image) => {
+                            const previewSizes = getPreviewSizes(image.aspectRatio);
+
+                            return (
+                                <ImageCard
+                                    a11yLabel={image.a11yLabel}
+                                    aspectRatio={image.aspectRatio}
+                                    authorName={image.authorName}
+                                    downloadUrl={image.downloadUrl}
+                                    imageSrc={`https://picsum.photos/id/${image.id}/${previewSizes.width}/${previewSizes.height}`}
+                                    key={image.id}
+                                    onClick={() => openModal(image)}
+                                    ref={images[images.length - 1].id === image.id ? lastImageRef : undefined}
+                                />
+                            );
+                        })}
                     </div>
                 ))}
 
@@ -121,6 +139,7 @@ const ImageGrid: FunctionComponent<ImageGridProps> = ({ images, isLoading, lastI
                         imageSrc={`https://picsum.photos/id/${selectedImage.id}/${selectedImage.width}/${selectedImage.height}`}
                         isOpen={Boolean(selectedImage)}
                         onClose={closeModal}
+                        previewSrc={`https://picsum.photos/id/${selectedImage.id}/${previewSizes!.width}/${previewSizes!.height}`}
                     />
                 ) : null}
             </div>

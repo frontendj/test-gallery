@@ -1,6 +1,6 @@
 import { A11yVisuallyHidden } from 'components/A11y/A11yVisuallyHidden';
 import { Icon } from 'components/Icon/Icon';
-import { FunctionComponent, useEffect, useRef } from 'react';
+import { FunctionComponent, useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import './ImageModal.scss';
@@ -31,6 +31,10 @@ export interface ImageModalProps {
      * This should be used to update the state controlling the `isOpen` prop.
      */
     onClose: () => void;
+    /**
+     * Image preview src
+     */
+    previewSrc: string;
 }
 
 const ImageModal: FunctionComponent<ImageModalProps> = ({
@@ -40,8 +44,11 @@ const ImageModal: FunctionComponent<ImageModalProps> = ({
     imageSrc,
     isOpen,
     onClose,
+    previewSrc,
 }) => {
     const dialogRef = useRef<HTMLDialogElement>(null);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const handleImageLoaded = () => setIsLoaded(true);
 
     useEffect(() => {
         const dialogNode = dialogRef.current;
@@ -72,7 +79,23 @@ const ImageModal: FunctionComponent<ImageModalProps> = ({
                 <Icon a11yLabel="Close" name="icon-close" />
             </button>
 
-            <img alt={a11yLabel} className="image-modal__media" src={imageSrc} />
+            <div className="image-modal__media">
+                <div
+                    className="image-modal__preview"
+                    style={{
+                        backgroundImage: `url("${previewSrc}")`,
+                    }}
+                />
+                <img
+                    alt={a11yLabel}
+                    className="image-modal__img"
+                    onLoad={handleImageLoaded}
+                    src={imageSrc}
+                    style={{
+                        opacity: !isLoaded ? 0 : 1,
+                    }}
+                />
+            </div>
 
             <div className="image-modal__info">
                 <p className="image-modal__author">Author: {authorName}</p>
