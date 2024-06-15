@@ -1,6 +1,6 @@
 import { A11yVisuallyHidden } from 'components/A11y/A11yVisuallyHidden';
 import { Icon } from 'components/Icon/Icon';
-import { CSSProperties, FunctionComponent, Ref } from 'react';
+import { CSSProperties, forwardRef } from 'react';
 
 import './ImageCard.scss';
 
@@ -22,10 +22,6 @@ export interface ImageCardProps {
      */
     downloadUrl: string;
     /**
-     * Ref for the root element
-     */
-    elementRef?: Ref<HTMLDivElement>;
-    /**
      * Image src
      */
     imageSrc: string;
@@ -36,30 +32,26 @@ export interface ImageCardProps {
     onClick: () => void;
 }
 
-const ImageCard: FunctionComponent<ImageCardProps> = ({
-    a11yLabel,
-    aspectRatio = 1.5,
-    authorName,
-    downloadUrl,
-    elementRef,
-    imageSrc,
-    onClick,
-}) => {
-    return (
-        <div className="image-card" ref={elementRef} style={{ '--aspect-ratio': aspectRatio } as CSSProperties}>
-            <button className="image-card__media" onClick={onClick}>
-                <img alt={a11yLabel} className="image-card__image" loading="lazy" src={imageSrc} />
-                <A11yVisuallyHidden>Open in full screen</A11yVisuallyHidden>
-            </button>
-            <div className="image-card__content" data-testid="image-card-content">
-                <div className="image-card__author">{authorName}</div>
-                <a className="image-card__action" download href={downloadUrl} rel="noreferrer" target="_blank">
-                    <Icon a11yLabel={`Download ${a11yLabel}`} name="icon-download" />
-                    <A11yVisuallyHidden>(Opens in new window)</A11yVisuallyHidden>
-                </a>
+const ImageCard = forwardRef<HTMLDivElement, ImageCardProps>(
+    ({ a11yLabel, aspectRatio = 1.5, authorName, downloadUrl, imageSrc, onClick }, ref) => {
+        return (
+            <div className="image-card" ref={ref} style={{ '--aspect-ratio': aspectRatio } as CSSProperties}>
+                <button className="image-card__media" onClick={onClick}>
+                    <img alt={a11yLabel} className="image-card__image" loading="lazy" src={imageSrc} />
+                    <A11yVisuallyHidden>Open in full screen</A11yVisuallyHidden>
+                </button>
+                <div className="image-card__content" data-testid="image-card-content">
+                    <div className="image-card__author">{authorName}</div>
+                    <a className="image-card__action" download href={downloadUrl} rel="noreferrer" target="_blank">
+                        <Icon a11yLabel={`Download ${a11yLabel}`} name="icon-download" />
+                        <A11yVisuallyHidden>(Opens in new window)</A11yVisuallyHidden>
+                    </a>
+                </div>
             </div>
-        </div>
-    );
-};
+        );
+    },
+);
+
+ImageCard.displayName = 'ImageCard';
 
 export { ImageCard };

@@ -104,10 +104,10 @@ const ImageGrid: FunctionComponent<ImageGridProps> = ({ images, isLoading, lastI
                                 aspectRatio={image.aspectRatio}
                                 authorName={image.authorName}
                                 downloadUrl={image.downloadUrl}
-                                elementRef={images[images.length - 1].id === image.id ? lastImageRef : undefined}
                                 imageSrc={`https://picsum.photos/id/${image.id}/300/200`}
                                 key={image.id}
                                 onClick={() => openModal(image)}
+                                ref={images[images.length - 1].id === image.id ? lastImageRef : undefined}
                             />
                         ))}
                     </div>
