@@ -65,10 +65,10 @@ Custom hook to manage fetching images from the API and handling loading states. 
 Displays a grid of images. Supports infinite scrolling and manual loading of more images (keyboard only access). Responsive depending on the screen size with reducing to 2 or 1 column on smaller screens.
 
 **ImageCard**
-Represents an individual image in the grid. Has a presentation in Storybook that inclused simple previw and storybook test that checks focus-within behaviour
+Represents an individual image in the grid. Has a presentation in Storybook that inclused simple previw and storybook test that checks focus-within behaviour.
 
 **ImageModal**
-Displays a full-screen preview of the selected image. Uses the most native approach for modals - native HTML component Dialog
+Displays a full-screen version of the selected image. Uses the most native approach for modals - native HTML component Dialog. Initially shows the preview and then shows the full image when it's loaded.
 
 **A11yVisuallyHidden**
 Handles visually hidden accessible texts
@@ -87,6 +87,7 @@ Calculates scrollbar width for further usage in cases when we need to toggle scr
 This project includes accessibility features to improve the user experience for people using screen readers:
 
 **Live Announcements:** New images are announced to screen readers when they are loaded.
+
 **Keyboard Navigation:** Users can navigate through images and interact with the "Load More" button using the keyboard.
 
 ## Stack
