@@ -5,6 +5,7 @@
 
 .image-card__media {
     width: 100%;
+    overflow: hidden;
 }
 
 .image-card__image {
@@ -12,6 +13,17 @@
     width: 100%;
     background-color: #706a6a;
     aspect-ratio: var(--aspect-ratio, 1.5);
+    transition: transform 0.2s linear;
+    transform-origin: center center;
+
+    .image-card__media:hover &,
+    .image-card__media:focus & {
+        transform: scale(1.05);
+
+        @media (prefers-reduced-motion) {
+            transform: none;
+        }
+    }
 }
 
 .image-card__content {

@@ -1,5 +1,7 @@
 .layout {
     padding: var(--gap-m);
+    max-width: var(--layout-max-width);
+    margin: 0 auto;
 
     > h1 {
         position: sticky;

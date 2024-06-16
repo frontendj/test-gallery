@@ -3,15 +3,36 @@ import { ImageCard, ImageCardProps } from 'components/ImageCard/ImageCard';
 import { ImageModal } from 'components/ImageModal/ImageModal';
 import { Loader } from 'components/Loader/Loader';
 import { FunctionComponent, useEffect, useState } from 'react';
+import { breakpoints } from 'utils/breakpoints';
+import { tokens } from 'utils/tokens';
 
 import './ImageGrid.scss';
 
-function getPreviewSizes(aspectRatio: number) {
-    const baseWidth = 200;
+function getUrlSizing(aspectRatio: number, width = 200) {
+    return `${width}/${Math.round(width / aspectRatio)}`;
+}
+
+function getImageSources(imageId: string, aspectRatio: number) {
+    // max widths for images in columns
+    const singleColumnMaxWidth = breakpoints.mobile - 2 * tokens.GAP_M;
+    const doubleColumnMaxWidth = Math.round((breakpoints.tablet - 3 * tokens.GAP_M) / 2);
+    const tripleColumnMaxWidth = Math.round((breakpoints.desktop - 4 * tokens.GAP_M) / 3);
+
+    const imageSrc = `https://picsum.photos/id/${imageId}/${getUrlSizing(aspectRatio)}`;
+    const singleColumnSrc = `https://picsum.photos/id/${imageId}/${getUrlSizing(aspectRatio, singleColumnMaxWidth)}`;
+    const doubleColumnSrc = `https://picsum.photos/id/${imageId}/${getUrlSizing(aspectRatio, doubleColumnMaxWidth)}`;
+    const tripleColumnSrc = `https://picsum.photos/id/${imageId}/${getUrlSizing(aspectRatio, tripleColumnMaxWidth)}`;
+
+    const sizes = `(max-width: ${breakpoints.mobile}px) ${singleColumnMaxWidth}px, (max-width: ${breakpoints.tablet}px) ${doubleColumnMaxWidth}px, ${tripleColumnMaxWidth}px`;
+    const srcSet = `${singleColumnSrc} ${singleColumnMaxWidth}w,
+        ${doubleColumnSrc} ${doubleColumnMaxWidth}w,
+        ${tripleColumnSrc} ${tripleColumnMaxWidth}w
+    `;
 
     return {
-        height: Math.round(baseWidth / aspectRatio),
-        width: baseWidth,
+        imageSrc,
+        sizes,
+        srcSet,
     };
 }
 
@@ -60,9 +81,9 @@ const ImageGrid: FunctionComponent<ImageGridProps> = ({ images, isLoading, lastI
     // changing number of columns depending on screen width
     useEffect(() => {
         const handleResize = () => {
-            if (window.innerWidth < 400) {
+            if (window.innerWidth < breakpoints.mobile) {
                 setColumnCount(1);
-            } else if (window.innerWidth < 800) {
+            } else if (window.innerWidth < breakpoints.tablet) {
                 setColumnCount(2);
             } else {
                 setColumnCount(3);
@@ -102,29 +123,22 @@ const ImageGrid: FunctionComponent<ImageGridProps> = ({ images, isLoading, lastI
         setSelectedImage(null);
     };
 
-    let previewSizes;
-    if (selectedImage) {
-        previewSizes = getPreviewSizes(selectedImage.aspectRatio);
-    }
-
     return (
         <div className="image-grid">
             <div className="image-grid__columns">
                 {columns.map((column, index) => (
                     <div className="image-grid__column" key={index}>
                         {column.map((image) => {
-                            const previewSizes = getPreviewSizes(image.aspectRatio);
-
                             return (
                                 <ImageCard
                                     a11yLabel={image.a11yLabel}
                                     aspectRatio={image.aspectRatio}
                                     authorName={image.authorName}
                                     downloadUrl={image.downloadUrl}
-                                    imageSrc={`https://picsum.photos/id/${image.id}/${previewSizes.width}/${previewSizes.height}`}
                                     key={image.id}
                                     onClick={() => openModal(image)}
                                     ref={images[images.length - 1].id === image.id ? lastImageRef : undefined}
+                                    {...getImageSources(image.id, image.aspectRatio)}
                                 />
                             );
                         })}
@@ -139,7 +153,7 @@ const ImageGrid: FunctionComponent<ImageGridProps> = ({ images, isLoading, lastI
                         imageSrc={`https://picsum.photos/id/${selectedImage.id}/${selectedImage.width}/${selectedImage.height}`}
                         isOpen={Boolean(selectedImage)}
                         onClose={closeModal}
-                        previewSrc={`https://picsum.photos/id/${selectedImage.id}/${previewSizes!.width}/${previewSizes!.height}`}
+                        previewSrc={`https://picsum.photos/id/${selectedImage.id}/${getUrlSizing(selectedImage.aspectRatio)}`}
                     />
                 ) : null}
             </div>

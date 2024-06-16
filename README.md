@@ -105,7 +105,6 @@ This project includes accessibility features to improve the user experience for 
 -   introduce theming via semantic tokens using native CSS variables
 -   cover all components and variants in storybook
 -   better testing coverage
--   using srcset in images to load less
 -   support pagination for loaded images chunks
 -   add meaningful images descriptions (not possible with current API)
 -   add gradient images placeholders (Blurhash or similar) (not possible with current API)

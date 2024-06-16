@@ -30,14 +30,29 @@ export interface ImageCardProps {
      * Function to be called when the image card is clicked.
      */
     onClick: () => void;
+    /**
+     * Supported sizes for srcset
+     */
+    sizes?: string;
+    /**
+     * Srcset for image
+     */
+    srcSet?: string;
 }
 
 const ImageCard = forwardRef<HTMLDivElement, ImageCardProps>(
-    ({ a11yLabel, aspectRatio = 1.5, authorName, downloadUrl, imageSrc, onClick }, ref) => {
+    ({ a11yLabel, aspectRatio = 1.5, authorName, downloadUrl, imageSrc, onClick, sizes, srcSet }, ref) => {
         return (
             <div className="image-card" ref={ref} style={{ '--aspect-ratio': aspectRatio } as CSSProperties}>
                 <button className="image-card__media" onClick={onClick}>
-                    <img alt={a11yLabel} className="image-card__image" loading="lazy" src={imageSrc} />
+                    <img
+                        alt={a11yLabel}
+                        className="image-card__image"
+                        loading="lazy"
+                        sizes={sizes}
+                        src={imageSrc}
+                        srcSet={srcSet}
+                    />
                     <A11yVisuallyHidden>Open in full screen</A11yVisuallyHidden>
                 </button>
                 <div className="image-card__content" data-testid="image-card-content">

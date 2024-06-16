@@ -18,7 +18,7 @@
 
     // this width control is not necesary per se, but it gives slightly better experience when we changing
     // the screen width (i.e. rotating the phone) as the rules help browsers to rebuild the grid instantly
-    @media (min-width: 400px) {
+    @media (min-width: 480px) {
         width: calc((100% - var(--gap-m)) / 2);
     }
 
